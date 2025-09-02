@@ -1,0 +1,8 @@
+mcp[cli]==1.13.1
+strands-agents[openai]==1.6.0
+strands-agents-tools==0.2.5
+bedrock-agentcore==0.1.2
+playwright
+pydantic
+nest-asyncio
+python-dotenv

@@ -1,0 +1,5 @@
+docs/**
+.venv
+screenshots
+logs/**
+.env
