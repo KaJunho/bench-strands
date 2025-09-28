@@ -37,6 +37,9 @@ USE_BEDROCK=os.getenv("USE_BEDROCK")=="True"
 SF_API_KEY=os.getenv("SF_API_KEY")
 AWS_REGION=os.getenv("AWS_REGION")
 
+
+# 移除限流控制 - Claude 3.5 没有限速问题
+
 class SimpleAgent:
     """简洁的AI代理"""
     
@@ -50,7 +53,7 @@ class SimpleAgent:
         """
         if use_bedrock:
             self.model = BedrockModel(
-                model_id="us.anthropic.claude-3-7-sonnet-20250219-v1:0", 
+                model_id="anthropic.claude-3-5-sonnet-20241022-v2:0", 
                 region_name=AWS_REGION, 
                 temperature=0.7,          
                 max_tokens=15000,
