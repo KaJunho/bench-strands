@@ -1,6 +1,31 @@
-# Strands Agent
+# Strands Multi-Agent Deep Search System
 
-基于Strands Agents SDK的简洁AI代理，支持自定义问题和系统提示词，集成MCP工具和多种基础功能。
+基于Strands Agents SDK和LangGraph的多Agent深度搜索系统，支持复杂任务的智能分解和协作执行。
+
+## 🏗️ 系统架构
+
+### 单Agent模式 (simple_agent.py)
+- 传统的单一代理模式
+- 适合简单查询和快速响应
+- 集成MCP工具和基础功能
+
+### 多Agent模式 (multi_agent.py) 🆕
+- 基于Strands GraphBuilder的图形化工作流多Agent架构
+- **Task Analyzer Agent**: 任务分析和计划制定
+- **Information Collector Agent**: 信息收集和资料整理  
+- **Tool Executor Agent**: 工具选择和执行操作
+- **Result Analyzer Agent**: 结果分析和完成度判断
+- **Answer Formatter Agent**: 答案格式化和输出规范
+
+## 🎯 多Agent系统特色
+
+- ✅ **GraphBuilder架构**: 使用Strands GraphBuilder构建图形化工作流
+- ✅ **智能协作**: 5个专门Agent通过图形化工作流协同工作
+- ✅ **任务分解**: 自动将复杂任务分解为可执行的子任务
+- ✅ **迭代执行**: 支持多轮工具执行，直到任务完成
+- ✅ **工作流程**: 完全对应单Agent的工作流程
+- ✅ **格式化输出**: 严格按照要求格式化最终答案
+- ✅ **图形化执行**: 基于节点和边的工作流执行模式
 
 ## 🎯 项目特色
 
@@ -34,10 +59,23 @@ AWS_SECRET_ACCESS_KEY=your_secret_key_here
 AWS_DEFAULT_REGION=us-east-1
 ```
 
-### 3. 运行Agent
+### 3. 运行系统
 
+**统一启动器 (推荐):**
 ```bash
+python3 run.py
+```
+
+**直接运行各模式:**
+```bash
+# 单Agent模式
 python3 simple_agent.py
+
+# 多Agent任务解决
+python3 multi_agent.py
+
+# 系统测试
+python3 test_multi_agent.py
 ```
 
 
@@ -208,3 +246,61 @@ logging.basicConfig(level=logging.DEBUG)
 ---
 
 **享受与AI代理的智能对话吧！** 🚀
+
+## 🔄 GraphBuilder多Agent工作流程
+
+```mermaid
+graph TD
+    A[用户任务] --> B[task_analyzer]
+    B --> C[information_collector]
+    C --> D[tool_executor]
+    D --> E[result_analyzer]
+    E --> F{任务完成?}
+    F -->|否| D
+    F -->|是| G[answer_formatter]
+    G --> H[<answer>格式化答案</answer>]
+    
+    subgraph "GraphBuilder工作流"
+        B
+        C
+        D
+        E
+        G
+    end
+```
+
+## 🎯 多Agent使用场景
+
+### 适合多Agent模式的任务:
+- **复杂计算**: "计算复合函数的导数并绘制图像"
+- **数据分析**: "分析CSV文件中的销售数据并生成报告"
+- **信息查询**: "搜索最新的AI技术发展并总结要点"
+- **多步骤任务**: "创建一个Python程序，读取文件，处理数据，生成图表"
+
+### 适合单Agent模式的任务:
+- **简单问答**: "什么是Docker容器?"
+- **代码生成**: "写一个Python排序算法"
+- **快速计算**: "计算 2 + 3 * 4"
+- **文档解析**: "分析这个图片内容"
+
+## 🔧 配置文件
+
+### multi_agent_config.json
+```json
+{
+  "system_config": {
+    "max_iterations": 10,
+    "timeout_seconds": 300
+  },
+  "agent_config": {
+    "search": {
+      "max_results_per_query": 10,
+      "enable_deep_search": true
+    },
+    "analysis": {
+      "analysis_depth": "comprehensive",
+      "enable_visualization": true
+    }
+  }
+}
+```
