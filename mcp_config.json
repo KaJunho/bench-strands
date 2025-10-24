@@ -1,0 +1,38 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "docs/"
+      ],
+      "disabled": 0
+    },
+    "image_reader":{
+      "command": "python",
+      "args": [
+        "./tools/image_reader.py"
+      ],
+      "disabled": 1
+    },
+    "exa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.exa.ai/mcp?exaApiKey=d0a12765-90f2-4a9d-a68c-954d097552a5"
+      ],
+      "disabled": 1
+    },
+    "tavily-websearch": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.tavily.com/mcp/?tavilyApiKey=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"
+      ],
+      "disabled": 0
+    }
+  }
+}
